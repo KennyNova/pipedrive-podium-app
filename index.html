@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        #message-list {
+            flex: 1;
+            padding: 20px;
+            overflow-y: scroll;
+        }
+        #message-list .message {
+            margin-bottom: 15px;
+        }
+        #message-list .message .user {
+            font-weight: bold;
+        }
+        #message-list .message .text {
+            margin-top: 5px;
+        }
+        #input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        #input-area input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #input-area button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div id="message-list">
+        <!-- Messages will be appended here -->
+    </div>
+    <div id="input-area">
+        <input type="text" id="message-input" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const messageInput = document.getElementById('message-input');
+        const messageText = messageInput.value.trim();
+        
+        if (messageText !== '') {
+            const messageList = document.getElementById('message-list');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+
+            const userSpan = document.createElement('span');
+            userSpan.classList.add('user');
+            userSpan.textContent = 'You:';
+
+            const textP = document.createElement('p');
+            textP.classList.add('text');
+            textP.textContent = messageText;
+
+            messageDiv.appendChild(userSpan);
+            messageDiv.appendChild(textP);
+
+            messageList.appendChild(messageDiv);
+
+            // Scroll to the bottom of the message list
+            messageList.scrollTop = messageList.scrollHeight;
+
+            // Clear the input field
+            messageInput.value = '';
+        }
+    }
+</script>
+
+</body>
+</html>
